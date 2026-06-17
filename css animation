@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exercise A — CSS Transition: Box → Circle</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(92, 64, 64, 1) 100%);
+      --card-bg:  radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(92, 64, 64, 1) 100%);
+      --border:   #F3C5C5;
+      --text:     #f7f1f1;
+      --dim:      #f7f1f1;
+      --c1:       #4a9eda;
+      --c2:       #e05c5c;
+      --c3:       #5ce07a;
+      --c4:       #e0c45c;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      padding: 10px 16px 4px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--dim);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-title {
+      padding: 6px 16px 10px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* ── Demo Stage ── */
+    .demo-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      min-height: 240px;
+      border-bottom: 2px solid var(--border);
+      padding: 32px 24px;
+    }
+
+    .nav-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ── Each nav card ── */
+    .nav-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 120px;
+      height: 120px;
+      background: #F3C5C5;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+
+      transition:
+        border-radius 0.45s cubic-bezier(0.34, 1.2, 0.64, 1),
+        background    0.45s ease,
+        box-shadow    0.45s ease,
+        transform     0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    /* Link text */
+    .nav-card .label {
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #000000;
+      transition: color 0.45s ease, letter-spacing 0.45s ease;
+    }
+
+    /* Timing tag */
+    .nav-card .timing {
+      font-size: 8.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      transition: color 0.45s ease;
+    }
+
+    /* ── Hover: Box → Circle ── */
+    .nav-card:hover {
+      border-radius: 50%;
+      transform: scale(1.08);
+    }
+
+    /* Each card gets its own accent color */
+    .nav-card.v1:hover { background: var(--c1); box-shadow: 0 0 32px rgba(74,158,218,0.45); }
+    .nav-card.v2:hover { background: var(--c2); box-shadow: 0 0 32px rgba(224, 92, 92,0.45); }
+    .nav-card.v3:hover { background: var(--c3); box-shadow: 0 0 32px rgba(92,224,122,0.45); }
+    .nav-card.v4:hover { background: var(--c4); box-shadow: 0 0 32px rgba(224,196, 92,0.45); }
+
+    .nav-card.v1:hover .label,
+    .nav-card.v2:hover .label,
+    .nav-card.v3:hover .label,
+    .nav-card.v4:hover .label { color: #fff; letter-spacing: 0.2em; }
+
+    .nav-card.v1:hover .timing,
+    .nav-card.v2:hover .timing,
+    .nav-card.v3:hover .timing,
+    .nav-card.v4:hover .timing { color: rgba(255,255,255,0.7); }
+
+    /* ── Override timing function per card ── */
+    .nav-card.v1 { transition-timing-function: ease; }
+    .nav-card.v2 { transition-timing-function: ease-in-out; }
+    .nav-card.v3 { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .nav-card.v4 { transition-timing-function: steps(6, end); }
+
+  </style>
+</head>
+<body>
+
+  <div class="page-header">Exercise A — CSS Transition: Navigation Link</div>
+  <div class="page-title">Julia Isabel T. Dofitas // BSCPE - 3B</div>
+
+  <!-- Demo Stage -->
+  <div class="demo-stage">
+    <div class="nav-row">
+
+      <a class="nav-card v1" href="#">
+        <span class="label"><strong>☆ LINK ☆</strong></span>
+        <span class="timing">ease</span>
+      </a>
+
+      <a class="nav-card v2" href="#">
+        <span class="label"><strong>☆ LINK ☆</strong></span>
+        <span class="timing">ease-in</span>
+      </a>
+
+      <a class="nav-card v3" href="#">
+        <span class="label"><strong>☆ LINK ☆</strong></span>
+        <span class="timing">ease-out</span>
+      </a>
+
+      <a class="nav-card v4" href="#">
+        <span class="label"><strong>☆ LINK ☆</strong></span>
+        <span class="timing">ease-in-out</span>
+      </a>
+
+    </div>
+  </div>
+
+</body>
+</html>
